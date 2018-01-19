@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Pages list</h1>
+{% include 'manage/manage.html.twig' %}
+<div class="countainer">
+
+
+    <div class="col-md-10 col-md-offset-0">
+        <table class="table table-responsive">
+            <thead>
+            <tr>
+                <th>{{ knp_pagination_sortable(pagination,'Id' ,'p.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination,'Title' ,'p.title') }}</th>
+                {#<th>Text</th>#}
+                <th>{{ knp_pagination_sortable(pagination,'Picture' ,'p.picture') }}</th>
+                <th>{{ knp_pagination_sortable(pagination,'Slug' ,'p.slug') }}</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for page in pagination %}
+                <tr {% if loop.index is odd %}class="color"{% endif %}>
+                <tr>
+
+                    <td class="col-sm-1 col-md-2 col-lg-2"><a
+                                href="{{ path('page_show', { 'slug': page.slug }) }}">{{ page.id }}</a></td>
+                    <td class="col-sm-3 col-md-6 col-lg-4">{{ page.title }}</td>
+                    <td class="col-sm-3 col-md-6 col-lg-4">{{ page.text }}</td>
+                    <td class="col-sm-3 col-md-6 col-lg-4"><img src="{{ '/images/advert/'~page.picture }}" class="img-thumbnail"></td>
+                    <td class="col-sm-3 col-md-6 col-lg-4">{{ page.slug }}</td>
+                    <td class="col-sm-3 col-md-6 col-lg-4">
+                        <ul>
+
+                            <a href="{{ path('page_show', { 'slug': page.slug }) }}"
+                               class="label label-success">show</a>
+
+
+                            <a href="{{ path('page_edit', { 'slug': page.slug }) }}"
+                               class="label label-warning">edit</a>
+
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+
+        </table>
+        <div class="navigation">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
+        <div>
+
+            <ul>
+                <li>
+                    <a href="{{ path('page_new') }}" class="btn btn-warning">>Create a new page</a>
+                </li>
+            </ul>
+
+            {% endblock %}

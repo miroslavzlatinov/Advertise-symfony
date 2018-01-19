@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Categories list</h1>
+{% include 'manage/manage.html.twig' %}
+{% include 'flash/flash.html.twig' %}
+<div class="countainer">
+
+
+    <div class="col-md-10 col-md-offset-0">
+        <table class="table table-responsive">
+            <thead>
+            <tr>
+                <th>{{ knp_pagination_sortable(pagination,'Id' ,'p.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination,'Name' ,'p.name') }}</th>
+                <th>{{ knp_pagination_sortable(pagination,'Slug' ,'p.slug') }}</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for category in pagination %}
+                <tr {% if loop.index is odd %}class="color"{% endif %}>
+                <tr>
+                    <td><a href="{{ path('category_show', { 'slug': category.slug }) }}">{{ category.id }}</a></td>
+                    <td>{{ category.name }}</td>
+                    <td>{{ category.slug }}</td>
+                    <td>
+                        <ul>
+
+                                <a href="{{ path('category_show', { 'slug': category.slug }) }}"
+                                   class="label label-success">show</a>
+
+
+                                <a href="{{ path('category_edit', { 'slug': category.slug }) }}"
+                                   class="label label-warning">edit</a>
+
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="navigation">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
+        <ul>
+            <li>
+                <a href="{{ path('category_new') }}">Create a new category</a>
+            </li>
+        </ul>
+        <div>
+            <div>
+                {% endblock %}

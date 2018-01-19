@@ -1,0 +1,32 @@
+
+{% block head %}
+
+{% endblock %}
+{% block content %}
+    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 ">
+
+
+        <div class="panel panel-primary">
+            <div class="panel-heading"><span>Manage</span></div>
+            <div class="panel-body">
+                <ul>
+
+                        <li><a href="{{ path('advert_index') }}">Advert</a></li>
+
+
+                        <li><a href="{{ path('page_index') }}">Manage Pages</a></li>
+
+
+                        <li><a href="{{ path('city_index') }}">Manage Cities</a></li>
+
+
+                        <li><a href="{{ path('category_index') }}">Category</a></li>
+
+                        <li><a href="{{ path('image_index') }}">Images</a></li>
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

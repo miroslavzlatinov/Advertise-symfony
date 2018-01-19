@@ -1,0 +1,92 @@
+imports:
+    - { resource: config.yml }
+
+framework:
+    router:
+        resource: '%kernel.project_dir%/app/config/routing_dev.yml'
+        strict_requirements: true
+    profiler: { only_exceptions: false }
+
+web_profiler:
+    toolbar: true
+    intercept_redirects: false
+
+monolog:
+    handlers:
+        main:
+            type: stream
+            path: '%kernel.logs_dir%/%kernel.environment%.log'
+            level: debug
+            channels: ['!event']
+        console:
+            type: console
+            process_psr_3_messages: false
+            channels: ['!event', '!doctrine', '!console']
+        # To follow logs in real time, execute the following command:
+        # `bin/console server:log -vv`
+        server_log:
+            type: server_log
+            process_psr_3_messages: false
+            host: 127.0.0.1:9911
+        # uncomment to get logging in your browser
+        # you may have to allow bigger header sizes in your Web server configuration
+        #firephp:
+        #    type: firephp
+        #    level: info
+        #chromephp:
+        #    type: chromephp
+        #    level: info
+
+#swiftmailer:
+#    delivery_addresses: ['me@example.com']
+
+bazinga_faker:
+    orm: doctrine
+    entities:
+        AdvertBundle\Entity\Category:
+            number: 8
+            custom_formatters:
+               name: { method: randomElement, parameters: [ ['Designer Perfumes','Computers','Books','Clothes','Watches','Cameras','Electronics'] ] }
+#               description: { method: sentence }
+#               printNum: { method: numberBetween, parameters: ['500','600'] }
+        AdvertBundle\Entity\City:
+                            number: 7
+                            custom_formatters:
+                               name:  { method: randomElement, parameters: [ ["Varna","Burgas","Sofia","Razgrad","Silistra","Pavlikeni","Kainardja"] ] }
+        AdvertBundle\Entity\Advert:
+            number: 20
+            custom_formatters:
+#                image: { method: imageUrl, parameters: [ '800','500','','false','' ] }
+#                image: { method: image, parameters: [ '/home/miroslav/PhpstormProjects/Advert/web/images/myshop/','800','500','',false ] }
+#                name: { method: sentence }
+#                stock: { method: numberBetween, parameters: ['5','500'] }
+#                description: { method: realText }
+                price: { method: randomFloat, parameters: ['2','0','200']}
+                title: { method: sentence }
+                description: { method: realText }
+                price: { method: randomFloat, parameters: ['2','0','200']}
+                mainPicture: { method: image, parameters: [ '/home/miroslav/PhpstormProjects/Advert/web/images/advert/','800','500','',false ] }
+#                Published:
+#                expdate:
+#                viewsCount:
+
+#                category:   { method: numberBetween, parameters: ['1','4'] }
+#                user: { method: numberBetween, parameters: ['5','7'] }
+#                cerated_at:
+#                updates_at:
+#                published:
+
+
+        AdvertBundle\Entity\Page:
+                     number: 20
+                     custom_formatters:
+                         title: { method: sentence }
+                         text: { method: realText }
+                         picture:  { method: image, parameters: [ '/home/miroslav/PhpstormProjects/Advert/web/images/advert/','800','500','',false ] }
+
+
+        AdvertBundle\Entity\Image:
+                     number: 40
+                     custom_formatters:
+                        name:   { method: sentence }
+                        location: { method: image, parameters: [ '/home/miroslav/PhpstormProjects/Advert/web/images/advert/','800','500','',false ] }

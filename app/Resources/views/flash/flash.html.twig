@@ -1,0 +1,15 @@
+
+{% block content %}
+{% for msg in app.session.flashBag.get('delete') %}
+    <div class="alert alert-danger">
+        <h1>{{ msg }}</h1>
+    </div>
+{% endfor %}
+
+
+    {% for msg in app.session.flashBag.get('error') %}
+        <div class="alert alert-danger">
+            <h1>{{ msg }}</h1>
+        </div>
+    {% endfor %}
+{% endblock %}

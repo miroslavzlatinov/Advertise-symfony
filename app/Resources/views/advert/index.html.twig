@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% include 'manage/manage.html.twig' %}
+    {% include 'flash/flash.html.twig' %}
+    <div class="countainer">
+        <div class="col-md-10 col-xd-16 col-md-offset-0">
+            <h1>Adverts list</h1>
+
+            <div class="count">
+
+            </div>
+            <table>
+                <tr>
+                    {# sorting of properties based on query components #}
+                    <th>{{ knp_pagination_sortable(pagination,'Id' ,'p.id') }}</th>
+                    <th>{{  knp_pagination_sortable(pagination,'Title' ,'p.title') }}</th>
+                    <th>{{  knp_pagination_sortable(pagination,'Description' ,'p.description') }}</th>
+                    <th>{{  knp_pagination_sortable(pagination,'Price' ,'p.price') }}</th>
+                    <th>{{  knp_pagination_sortable(pagination,'Active' ,'p.Published') }}</th>
+                    <th>{{  knp_pagination_sortable(pagination,'DateTo' ,'p.expdate') }}</th>
+                    <th>{{  knp_pagination_sortable(pagination,'Views' ,'p.viewsCount') }}</th>
+
+                    {#<th>Mainpicture</th>#}
+                    <th>Actions</th>
+
+
+                </tr>
+
+
+
+
+                {# table body #}
+                {% for advert in pagination %}
+                    <tr {% if loop.index is odd %}class="color"{% endif %}>
+
+                        <td class="col-sm-1 col-md-2 col-lg-2"><a
+                                    href="{{ path('advert_show', { 'id': advert.id }) }}">{{ advert.id }}</a></td>
+                        <td class="col-sm-1 col-md-2 col-lg-2">{{ advert.title }}</td>
+                        <td class="col-sm-1 col-md-5 col-lg-8">{{ advert.description }}</td>
+                        <td class="col-sm-1 col-md-2 col-lg-2">{{ advert.price }}</td>
+                        <td class="col-sm-1 col-md-5 col-lg-8"><img scr="{{ asset('/images/advert/'~advert.mainPicture )}} "  class="img-thumbnail"></td>
+                        {#<td class="col-sm-1 col-md-2 col-lg-2">{% if advert.Published %}Yes{% else %}No{% endif %}</td>#}
+                        <td class="col-sm-1 col-md-2 col-lg-2">{{ advert.expdate | date("m/d/Y") }}</td>
+                        <td class="col-sm-1 col-md-2 col-lg-2">{% if advert.createDate %}{{ advert.createDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td class="col-sm-1 col-md-2 col-lg-2">{{ advert.viewsCount }}</td>
+                        <td><ul>
+                            <a href="{{ path('advert_show', { 'id': advert.id }) }}"
+                               class="label label-success">show</a>
+                            <a href="{{ path('advert_edit', { 'id': advert.id }) }}"
+                               class="label label-warning">edit</a>
+
+                            </ul></td>
+                    </tr>
+
+
+
+                {% endfor %}
+            </table>
+            {# display navigation #}
+            <div class="navigation">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+
+            <ul>
+                <li>
+                    <a href="{{ path('advert_new') }}">Create a new advert</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

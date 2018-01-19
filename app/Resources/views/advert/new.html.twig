@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Advert creation</h1>
+{#{{ dump(form) }}#}
+{% include 'flash/flash.html.twig' %}
+<div class="  col-lg-15 col-md-offset-1">
+
+
+    {{ form_start(form) }}
+    <table>
+        <tr>
+            <td>
+                {{ form_label(form.title) }}
+            </td>
+            <td>
+                {{ form_widget(form.title) }}
+            </td>
+
+
+            {#{{ form_label(form.createDate)}}#}
+            {#{{ form_widget(form.createDate)}}#}
+            <td>
+                {{ form_label(form.category) }}
+            </td>
+            <td>
+                {{ form_widget(form.category) }}
+            </td>
+        <tr>
+        </tr>
+        <tr>
+            <td>
+                {{ form_label(form.city) }}
+            </td>
+            <td>
+                {{ form_widget(form.city) }}
+            </td>
+            <td>
+                {{ form_label(form.viewsCount) }}
+            </td>
+            <td>
+                {{ form_widget(form.viewsCount) }}
+            </td>
+            <td>
+                {{ form_label(form.Published) }}
+            </td>
+            <td>
+                {{ form_widget(form.Published) }}
+            </td>
+            <td>
+                {{ form_label(form.expdate) }}
+            </td>
+            <td>
+                {{ form_widget(form.expdate) }}
+            </td>
+
+
+        </tr>
+        <tr>
+            <td>
+                {{ form_label(form.price) }}
+            </td>
+            <td>
+                {{ form_widget(form.price) }}
+            </td>
+        </tr>
+    </table>
+
+
+    <div class="  col-lg-18 col-md-offset">
+        <div class="col-md-8">
+            {{ form_label(form.description) }}
+            {{ form_widget(form.description) }}
+            {{ form_label(form.files) }}
+            {{ form_widget(form.files) }}
+            {{ form_label(form.image_form) }}
+            {{ form_widget(form.image_form) }}
+
+            <div class="col-md-8">
+               
+               
+
+                <input type="submit" value="Create"/>
+
+                {{ form_end(form) }}
+
+                <ul>
+                    <li>
+                        <a href="{{ path('advert_index') }}">Back to the list</a>
+                    </li>
+                </ul>
+
+                <div>
+
+                    {% endblock %}
+
+

@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% include 'flash/flash.html.twig' %}
+<div class="countainer-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+    <h1>Page</h1>
+
+    <table class="table">
+        <tbody>
+            <tr scope="row">
+                <th scope="col">Id</th>
+                <td scope="col">{{ page.id }}</td>
+            </tr>
+            <tr scope="row">
+                <th scope="col">Title</th>
+                <td scope="col">{{ page.title }}</td>
+            </tr>
+            <tr scope="row">
+
+                <th scope="col">Text</th>
+                <td scope="col">{{ page.text }}</td>
+            </tr>
+            <tr scope ="row">
+                <div class="col-md-4">
+
+
+                </div>
+                <th scope="col">Picture</th>
+                <td scope="col"><img src="{{ '/images/advert/'~page.picture }}" alt="{{ page.slug }} image"
+                                     class="thumbnail img-responsive"></td>
+            </tr>
+            <tr scope ="row">
+                <th scope="col">Slug</th>
+                <td scope="col">{{ page.slug }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul scope="row">
+        <li>
+            <a href="{{ path('page_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('page_edit', { 'slug': page.slug }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+               <div>
+                   <div>
+                       <div>
+{% endblock %}
+
+

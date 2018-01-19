@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Images list</h1>
+    {% include 'manage/manage.html.twig' %}
+    {% include 'flash/flash.html.twig' %}
+    <div class="countainer">
+        <div class="col-md-10 col-md-offset-0">
+            <table class="table table-responsive">
+
+                <thead>
+                <tr>
+                    <th>{{ knp_pagination_sortable(pagination,'Id' ,'p.id') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination,'Name' ,'p.name') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination,'Picture' ,'p.location') }}</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for image in pagination %}
+                    <tr {% if loop.index is odd %}class="color"{% endif %}>
+                    <tr>
+                        <td><a href="{{ path('image_show', { 'id': image.id }) }}">{{ image.id }}</a></td>
+                        <td>{{ image.name }}</td>
+                        <td>
+                            <div class="col-sm-4">
+                                <div class="panel-body"><img src="{{ '/images/advert/'~image.location }}" class="img-responsive"
+                                                             style="width:100%" alt="Image"></div>
+
+                            </div>
+                        </td>
+                        <td>
+                            <ul>
+
+                                <a href="{{ path('image_show', { 'id': image.id }) }}"
+                                   class="label label-success">show</a>
+
+
+                                <a href="{{ path('image_edit', { 'id': image.id }) }}"
+                                   class="label label-warning">edit</a>
+
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="navigation">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+
+            {#<ul>#}
+            {#<li>#}
+            {#<a href="{{ path('image_new') }}">Create a new image</a>#}
+            {#</li>#}
+            {#</ul>#}
+        </div>
+    </div>
+{% endblock %}
